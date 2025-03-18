@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { catchAsyncError } from "../middleware/catchAsyncError.js";
 import ErrorHandler from "../middleware/error.js";
-import { User } from "../models/userSchema.js";
+import { User } from "../models/UserSchema.js";
 
 export const register = catchAsyncError(async (req, res, next) => {
   const { name, email, phone, password } = req.body;
