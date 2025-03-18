@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const messageSchema = new mongoose.Schema({
-  fullName: {
+  name: {
     type: String,
     required: [true, "Full name is required!"],
     minLength: [2, "Full name must contain at least 2 characters!"],
@@ -17,10 +17,14 @@ const messageSchema = new mongoose.Schema({
     required: [true, "Phone number is required!"],
     minLength: [10, "Phone number must contain at least 10 digits!"],
   },
-  teamName: {
+  age: {
     type: String,
-    required: [true, "Team name is required!"], // Ensure teamName is required
-    minLength: [2, "Team name must contain at least 2 characters!"],
+    required: [true, "age is required!"], // Ensure teamName is required
+    minLength: [2, "age must contain at least 2 characters!"],
+  },
+  role: {
+    type: String,
+    required: [true, "role is required!"], // Ensure teamName is required
   },
   createdAt: {
     type: Date,

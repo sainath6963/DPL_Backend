@@ -4,19 +4,20 @@ import nodemailer from "nodemailer";
 import { catchAsyncError } from "../middleware/catchAsyncError.js";
 
 export const sendMessage = catchAsyncError(async (req, res, next) => {
-  const { name, email, phone, teamName } = req.body; // Ensure field names match frontend
+  const { name, email, phone, age, role } = req.body; // Ensure field names match frontend
 
   // Validate required fields
-  if (!name || !email || !phone || !teamName) {
+  if (!name || !email || !phone || !age || !role) {
     return next(new ErrorHandler("All fields are required.", 400));
   }
 
   // Save message to the database
   const data = await Message.create({
-    fullName: name, // Ensure compatibility with schema
+    name: name, // Ensure compatibility with schema
     email,
     phoneNumber: phone,
-    teamName,
+    age,
+    role,
   });
 
   // Ensure admin email is set
@@ -45,7 +46,9 @@ export const sendMessage = catchAsyncError(async (req, res, next) => {
         Full Name: ${name}
         Email: ${email}
         Phone Number: ${phone}
-        Team Name: ${teamName}
+        Age: ${age}
+        Role: ${role}
+
     `,
     html: `
         <div style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;">
@@ -54,7 +57,8 @@ export const sendMessage = catchAsyncError(async (req, res, next) => {
                 <p><strong>Full Name:</strong> ${name}</p>
                 <p><strong>Email:</strong> ${email}</p>
                 <p><strong>Phone Number:</strong> ${phone}</p>
-                <p><strong>Team Name:</strong> ${teamName}</p>
+                <p><strong>Age:</strong> ${age}</p>
+                <p><strong>Role:</strong> ${role}</p>
                 
                 <hr>
                 <p style="font-size: 12px; color: #666;">This is an automated email. Please do not reply.</p>
@@ -76,5 +80,28 @@ export const sendMessage = catchAsyncError(async (req, res, next) => {
     message:
       "Registration successful! An email notification has been sent to the admin.",
     data,
+  });
+});
+
+export const getAllMessages = catchAsyncError(async (req, res, next) => {
+  const messages = await Message.find().sort({ createdAt: -1 }); // Newest first
+  res.status(200).json({
+    success: true,
+    count: messages.length,
+    messages,
+  });
+});
+
+export const deleteMessage = catchAsyncError(async (req, res, next) => {
+  const { id } = req.params;
+
+  const message = await Message.findByIdAndDelete(id);
+  if (!message) {
+    return next(new ErrorHandler("Registration Not Found!.", 404));
+  }
+
+  res.status(200).json({
+    success: true,
+    message: "Registration Deleted Successfully!.",
   });
 });
