@@ -17,6 +17,7 @@ const validateFields = (body, category) => {
     bowlerType, // ✅ Updated field name (instead of bowler)
     armCategory,
     fieldCategory,
+    adharNo, // Add adharNo
   } = body;
 
   // ✅ Add validation rules based on category
@@ -30,6 +31,7 @@ const validateFields = (body, category) => {
     weight,
     category,
     fieldCategory,
+    adharNo, // Require adharNo
     ...(category === "Batsman" && { hand }),
     ...((category === "Bowler" || category === "All-Rounder") && {
       bowlerType,
@@ -67,6 +69,7 @@ const validateFields = (body, category) => {
       category === "Bowler" || category === "All-Rounder"
         ? armCategory?.trim()
         : null,
+    adharNo: adharNo?.trim(), //store adharNo
   };
 };
 

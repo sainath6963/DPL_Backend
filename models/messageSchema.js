@@ -51,7 +51,6 @@ const messageSchema = new mongoose.Schema({
     enum: ["Batsman", "Bowler", "All-Rounder"],
     required: [true, "Category is required!"],
   },
-
   // ✅ Use consistent field names
   hand: {
     type: String,
@@ -60,7 +59,6 @@ const messageSchema = new mongoose.Schema({
       return this.category === "Batsman" || this.category === "All-Rounder";
     },
   },
-
   bowlerType: {
     type: String,
     enum: ["Fast", "Medium", "Spinner"],
@@ -68,7 +66,6 @@ const messageSchema = new mongoose.Schema({
       return this.category === "Bowler" || this.category === "All-Rounder";
     },
   },
-
   armCategory: {
     type: String,
     enum: ["Right", "Left"],
@@ -76,13 +73,21 @@ const messageSchema = new mongoose.Schema({
       return this.category === "Bowler" || this.category === "All-Rounder";
     },
   },
-
   fieldCategory: {
     type: String,
     enum: ["General", "Wicket Keeper"],
     required: [true, "Field category is required!"],
   },
-
+  adharNo: {
+    // Add adharNo field
+    type: String,
+    required: [true, "Adhar number is required!"],
+    unique: true, //  Adhar numbers should be unique
+    validate: {
+      validator: (value) => /^\d{12}$/.test(value), // Basic validation for 12-digit number
+      message: "Adhar number must be a 12-digit number",
+    },
+  },
   createdAt: {
     type: Date,
     default: Date.now,
