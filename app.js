@@ -4,10 +4,9 @@ import cors from "cors";
 import { dbConnection } from "./database/dbConnection.js";
 import messageRouter from "./routes/messageRouter.js";
 import userRouter from "./routes/userRoutes.js";
+dotenv.config({ path: "./config/config.env" });
 
 const app = express();
-
-dotenv.config({ path: "./config/config.env" });
 
 app.use(
   cors({
