@@ -4,9 +4,9 @@ import ErrorHandler from "../middleware/error.js";
 import { User } from "../models/UserSchema.js";
 
 export const register = catchAsyncError(async (req, res, next) => {
-  const { name, email, phone, password } = req.body;
+  const { fullName, email, phone, password } = req.body;
 
-  if (!name || !email || !phone || !password) {
+  if (!fullName || !email || !phone || !password) {
     return next(new ErrorHandler("Please provide all required fields.", 400));
   }
 
@@ -33,7 +33,7 @@ export const register = catchAsyncError(async (req, res, next) => {
     message: "Registered successfully!",
     user: {
       id: user._id,
-      name: user.fullName,
+      fullName: user.fullName,
       email: user.email,
       phone: user.phone,
     },
