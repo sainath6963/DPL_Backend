@@ -8,11 +8,6 @@ const validateDate = (value) => {
 };
 
 const messageSchema = new mongoose.Schema({
-  formNo: {
-    type: String,
-    required: [true, "Form number is required!"],
-    unique: true, // Ensure unique form numbers
-  },
   fullName: {
     type: String,
     required: [true, "Full name is required!"],
