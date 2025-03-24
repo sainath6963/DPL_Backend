@@ -6,7 +6,6 @@ import mongoose from "mongoose";
 // ✅ Helper function to validate fields
 const validateFields = (body, category) => {
   const {
-    formNo,
     fullName,
     email,
     address,
@@ -22,7 +21,6 @@ const validateFields = (body, category) => {
 
   // ✅ Add validation rules based on category
   const requiredFields = {
-    formNo,
     fullName,
     email,
     address,
@@ -48,7 +46,6 @@ const validateFields = (body, category) => {
   }
 
   return {
-    formNo: formNo?.trim(),
     fullName: fullName?.trim(),
     email: email?.trim().toLowerCase(),
     address: address?.trim(),
