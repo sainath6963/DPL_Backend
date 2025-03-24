@@ -4,6 +4,7 @@ import cors from "cors";
 import { dbConnection } from "./database/dbConnection.js";
 import messageRouter from "./routes/messageRouter.js";
 import userRouter from "./routes/userRoutes.js";
+
 dotenv.config({ path: "./config/config.env" });
 
 const app = express();
@@ -15,9 +16,15 @@ app.use(
     credentials: true,
   })
 );
-app.use(express.json()); // Middleware to parse JSON request body
-app.use(express.urlencoded({ extended: true })); // For URL-encoded data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+// ✅ Add the root route
+app.get("/", (req, res) => {
+  res.send("Server is running...");
+});
+
+// Use your existing routes
 app.use("/api/v1/message", messageRouter);
 app.use("/api/v1/user", userRouter);
 
