@@ -12,7 +12,7 @@ dbConnection();
 
 app.use(
   cors({
-    origin: "*",
+    origin: "https://dplbutibori.in",
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
