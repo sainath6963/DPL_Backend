@@ -8,7 +8,6 @@ import userRouter from "./routes/userRoutes.js";
 dotenv.config({ path: "./config/config.env" });
 
 const app = express();
-dbConnection();
 
 app.use(
   cors({
@@ -28,5 +27,7 @@ app.get("/", (req, res) => {
 // Use your existing routes
 app.use("/api/v1/message", messageRouter);
 app.use("/api/v1/user", userRouter);
+
+dbConnection();
 
 export default app;
