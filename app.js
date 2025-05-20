@@ -19,7 +19,7 @@ const app = express();
 // CORS configuration
 app.use(
   cors({
-    origin: "*", // Allow specific origin
+    origin: "https://dplbutibori.in/", // Allow specific origin
 
     credentials: true,
   })
