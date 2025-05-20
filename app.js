@@ -15,9 +15,13 @@ const __dirname = path.dirname(__filename);
 dotenv.config({ path: "./config/config.env" });
 
 const app = express();
+
+// CORS configuration
 app.use(
   cors({
-    origin: "https://dplbutibori.in",
+    origin: "https://dplbutibori.in", // Allow specific origin
+    methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
     credentials: true,
   })
 );
@@ -50,12 +54,15 @@ app.get("/", (req, res) => {
   res.send("Server is running...");
 });
 
+// API routes
 app.use("/api/v1/message", messageRouter);
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/video", videoRoutes);
 
+// Database connection
 dbConnection();
 
+// Global error handling middleware
 app.use((err, req, res, next) => {
   console.error("Global Error:", err);
   res.status(err.status || 500).json({
