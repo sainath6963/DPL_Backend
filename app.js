@@ -18,7 +18,6 @@ const app = express();
 app.use(
   cors({
     origin: "https://dplbutibori.in",
-    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
