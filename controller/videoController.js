@@ -7,8 +7,8 @@ import Video from "../models/Video.js";
 import logger from "../utils/logger.js";
 
 // Set ffmpeg and ffprobe paths
-ffmpeg.setFfmpegPath(process.env.FFMPEG_PATH || "C:/ffmpeg/bin/ffmpeg.exe");
-ffmpeg.setFfprobePath(process.env.FFPROBE_PATH || "C:/ffmpeg/bin/ffprobe.exe");
+ffmpeg.setFfmpegPath("/usr/bin/ffmpeg");
+ffmpeg.setFfprobePath("/usr/bin/ffprobe");
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
