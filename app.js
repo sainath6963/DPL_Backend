@@ -19,9 +19,8 @@ const app = express();
 // CORS configuration
 app.use(
   cors({
-    origin: "https://dplbutibori.in", // Allow specific origin
-    methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
+    origin: "*", // Allow specific origin
+
     credentials: true,
   })
 );
